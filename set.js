@@ -17,4 +17,4 @@ function set(object, path, value) {
 
 // let object = { 'a': [{ 'b': { 'c': 3 } }] };
 // stringPath = 'a[0].b.c';
-// arrayPath = ['x', '0', 'y', 'z'];
+// arrayPath = ['a', '0', 'b', 'c'];
