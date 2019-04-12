@@ -5,7 +5,7 @@ function set(object, path, value) {
 
   if(path.constructor === Array) {p
      let stringPath = path.reduce((acc, item) => {
-         if(Number(item) === 0) {
+         if(Number(item) === 0 || Number(item).length) {
             return acc + `[${item}]`;
         } else {
             return acc + `.${item}`
