@@ -3,9 +3,9 @@ function set(object, path, value) {
       eval(`object.${path} = ${value}`);
   }
 
-  if(path.constructor === Array) {p
+  if(path.constructor === Array) {
      let stringPath = path.reduce((acc, item) => {
-         if(Number(item) === 0 || Number(item).length) {
+         if(Number(item) >= 0) {
             return acc + `[${item}]`;
         } else {
             return acc + `.${item}`
@@ -14,6 +14,7 @@ function set(object, path, value) {
       eval(`object${stringPath} = ${value}`);
   }
 }
+
 // let object = { 'a': [{ 'b': { 'c': 3 } }] };
 // stringPath = 'a[0].b.c';
 // arrayPath = ['x', '0', 'y', 'z'];
