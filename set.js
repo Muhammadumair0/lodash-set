@@ -1,4 +1,5 @@
-let obj = { a: [{ b: { c: 3 } }] };
+// let obj = { a: [{ b: { c: 3 } }] };
+// let obj = {};
 
 // let path = ['a', '0', 'b', 'c'];
 // let path = 'a[0].b.c';
