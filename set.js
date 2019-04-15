@@ -7,7 +7,10 @@ function set(object, path, value) {
   if (typeof path === "string") {
     try {
       eval(`object.${path} = ${value}`);
-    } catch (e) {}
+    } catch (e) {
+      generateDynamicPropertyForStringPath(obj, path);
+      eval(`object.${path} = ${value}`);
+    }
   }
 
   if (path.constructor === Array) {
@@ -19,12 +22,24 @@ function set(object, path, value) {
     try {
       eval(`object${stringPath} = ${value}`);
     } catch (e) {
-      createDynamicProperty(obj, path);
+      generateDynamicPropertyForArrayPath(obj, path);
       eval(`object${stringPath} = ${value}`);
     }
   }
 
-  function createDynamicProperty(obj, path) {
+  function generateDynamicPropertyForStringPath(obj, path) {
+    let resultArray = [];
+    let count = 0;
+    let arrayPath = path.split("");
+    for (let i = 0; i < arrayPath.length; i++) {
+      if (arrayPath[i] != "[" && arrayPath[i] != "]" && arrayPath[i] != ".") {
+        resultArray[count++] = arrayPath[i];
+      }
+    }
+    generateDynamicPropertyForArrayPath(obj, resultArray);
+  }
+
+  function generateDynamicPropertyForArrayPath(obj, path) {
     let value = 0;
     lastKeyIndex = path.length - 1;
     for (var i = 0; i < lastKeyIndex; ++i) {
