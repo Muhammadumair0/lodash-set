@@ -9,7 +9,7 @@ function set(object, path, value) {
     try {
       eval(`object.${path} = ${value}`);
     } catch (e) {
-      generateDynamicPropertyForStringPath(obj, path);
+      generateDynamicPropertyOnStringPath(obj, path);
       eval(`object.${path} = ${value}`);
     }
   }
@@ -23,12 +23,12 @@ function set(object, path, value) {
     try {
       eval(`object${stringPath} = ${value}`);
     } catch (e) {
-      generateDynamicPropertyForArrayPath(obj, path);
+      generateDynamicPropertyOnArrayPath(obj, path);
       eval(`object${stringPath} = ${value}`);
     }
   }
 
-  function generateDynamicPropertyForStringPath(obj, path) {
+  function generateDynamicPropertyOnStringPath(obj, path) {
     let resultArray = [];
     let count = 0;
     let arrayPath = path.split("");
@@ -37,10 +37,10 @@ function set(object, path, value) {
         resultArray[count++] = arrayPath[i];
       }
     }
-    generateDynamicPropertyForArrayPath(obj, resultArray);
+    generateDynamicPropertyOnArrayPath(obj, resultArray);
   }
 
-  function generateDynamicPropertyForArrayPath(obj, path) {
+  function generateDynamicPropertyOnArrayPath(obj, path) {
     let value = 0;
     lastKeyIndex = path.length - 1;
     for (var i = 0; i < lastKeyIndex; ++i) {
