@@ -19,12 +19,12 @@ function set(object, path, value) {
     try {
       eval(`object${stringPath} = ${value}`);
     } catch (e) {
-      generateDynamicProperty(obj, path);
+      createDynamicProperty(obj, path);
       eval(`object${stringPath} = ${value}`);
     }
   }
 
-  function generateDynamicProperty(obj, path) {
+  function createDynamicProperty(obj, path) {
     let value = 0;
     lastKeyIndex = path.length - 1;
     for (var i = 0; i < lastKeyIndex; ++i) {
